@@ -1,0 +1,54 @@
+---
+// Aqui você pode adicionar lógica de JS se precisar no futuro
+---
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infra Management | WL-INFRA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: radial-gradient(circle at top right, #1e293b, #020617);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .glass {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="max-w-5xl w-full p-6">
+    <header class="flex flex-col items-center mb-16 text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight">WL-INFRA <span class="text-sky-400">Nodes</span></h1>
+        <p class="text-slate-400 mt-2 font-mono text-sm uppercase tracking-widest">Acesso Restrito - Horizonte/CE</p>
+    </header>
+
+    <div class="grid md:grid-cols-2 gap-10">
+        
+        <a href="https://pvelab.wl-infra.uk/" target="_blank" class="glass p-10 rounded-3xl transition-all duration-500 hover:scale-105 border-sky-500/30 hover:border-sky-400 group">
+            <h2 class="text-2xl font-bold mb-3 text-amber-400">PVELAB</h2>
+            <p class="text-slate-400 text-sm mb-8">Nó de testes (Dell Optiplex 8080). Ambiente de homologação.</p>
+            <div class="text-sky-400 font-bold italic">Conectar →</div>
+        </a>
+
+        <a href="https://pvesamu.wl-infra.uk/" target="_blank" class="glass p-10 rounded-3xl transition-all duration-500 hover:scale-105 border-sky-500/30 hover:border-sky-400 group">
+            <h2 class="text-2xl font-bold mb-3 text-emerald-400">PVESAMU</h2>
+            <p class="text-slate-400 text-sm mb-8">Servidor de Produção. Serviços críticos e storage ativo.</p>
+            <div class="text-sky-400 font-bold italic">Conectar →</div>
+        </a>
+
+    </div>
+</div>
+
+</body>
+</html>
