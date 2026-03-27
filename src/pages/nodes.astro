@@ -9,13 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WL-INFRA // ACCESS_TERMINAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #010409;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMEZGMDAiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=');
             color: #00FF00;
             font-family: 'Fira Mono', monospace;
             min-height: 100vh;
@@ -25,57 +23,84 @@
             flex-direction: column;
             margin: 0;
             padding: 20px;
+            /* Efeito de linhas de scan de TV antiga (Sutil) */
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 3px 100%;
         }
-        .crt-glow { text-shadow: 0 0 8px rgba(0, 255, 0, 0.7); }
-        a { color: inherit; text-decoration: none !important; }
+
+        .crt-glow { text-shadow: 0 0 10px rgba(0, 255, 0, 0.8); }
+        
+        a { text-decoration: none !important; }
+
         .terminal-card {
-            background-color: rgba(1, 4, 9, 0.9);
+            background-color: rgba(0, 20, 0, 0.1);
             border: 2px solid #00FF00;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
+
         .terminal-card:hover {
             background-color: #00FF00;
             color: #010409;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.5);
         }
-        .terminal-icon { filter: drop-shadow(0 0 2px rgba(0, 255, 0, 0.6)); transition: all 0.2s; }
-        .terminal-card:hover .terminal-icon { filter: invert(1) brightness(0.1); }
+
+        .icon-box {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
     </style>
 </head>
 <body>
 
     <header class="w-full max-w-4xl flex flex-col items-center text-center mb-16 crt-glow">
-        <div class="mb-6 p-2 border-2 border-dashed border-[#00FF00]/50 rounded-xl">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAACXBIWXMAAAsTAAALEwEAmpwYAAABm0lEQVR4nO2YwUrDMBiFv00E8SBEvYreR6uXvYreR6v30Xpfsre9it5H60W96EVvIuqYhS0IdZqlS9oU8n9AcpL2p6S/T9sk7SClpAnNfX7fXz1A5pC5wByyB5kLzCFzkLnAHLIHmQvMIXOQucAcMheYQ/Ygc4E5ZA8yF5hD5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gK7vX6A/CdzgTlkLpIn6QN0yJ6fP5r6CwAAAABJRU5ErkJggg==" class="w-16 h-16 terminal-icon" />
+        <div class="icon-box">
+            <i class="fa-solid fa-terminal"></i>
         </div>
-        <h1 class="text-4xl font-bold tracking-tight">&gt; WL-INFRA_NODES</h1>
-        <div class="mt-4 text-[10px] font-bold border border-[#00FF00] px-3 py-1">[ HORIZONTE.CE // SECURED_SHELL ]</div>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tighter">
+            > WL-INFRA_NODES
+        </h1>
+        <div class="mt-4 text-xs font-bold border border-[#00FF00] px-4 py-1">
+            [ HORIZONTE.CE // SECURED_SHELL ]
+        </div>
     </header>
 
     <main class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-10">
-        <a href="https://pvelab.wl-infra.uk/" target="_blank" class="terminal-card p-10 rounded-xl block group">
-            <div class="flex flex-col items-center text-center">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAACXBIWXMAAAsTAAALEwEAmpwYAAABIUlEQVR4nO2YQUrEQBBF34REvYv3vYf3PYS9i+e9h97F87yH972HoDeRXkXvIkFpIAsmYIskf0BaVf0HmqR/OUn7G0l7SClpQnOfn7fTD5A5ZC4wh+xB5gJzyBxkLjCH7EHmAnPIXGAO2YPMBeaQOchcYA7Zg8wF5pC5yFxgDtmDzAXmkLnIXGAO2YPMAeaQucgcYA7Zg8wB5pC5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yHw7fIAsIXOBOWQukifpA3TIng9i37oO62Vl2AAAAABJRU5ErkJggg==" class="w-16 h-16 terminal-icon mb-6" />
-                <h2 class="text-2xl font-bold mb-4 crt-glow"># pvelab.local</h2>
-                <p class="text-xs mb-10 group-hover:text-[#010409]">[ DELL_OPTIPLEX_8080 ]<br/>Homologação_CTs_VMs.</p>
-                <div class="px-4 py-2 border-2 border-[#00FF00] font-bold group-hover:border-[#010409]">ACCESS_CONSOLE</div>
+        
+        <a href="https://pvelab.wl-infra.uk/" target="_blank" class="terminal-card p-10 rounded-lg block group text-center">
+            <div class="icon-box">
+                <i class="fa-solid fa-flask-vial"></i>
+            </div>
+            <h2 class="text-2xl font-bold mb-4 crt-glow group-hover:text-[#010409]"># pvelab.local</h2>
+            <p class="text-xs mb-10 group-hover:text-[#010409]">
+                [ DELL_OPTIPLEX_8080 ]<br/>
+                HOMOLOG_ENV // CT_VM_ACTIVE
+            </p>
+            <div class="inline-block px-6 py-2 border-2 border-[#00FF00] font-bold group-hover:border-[#010409]">
+                EXEC :: CONNECT
             </div>
         </a>
 
-        <a href="https://pvesamu.wl-infra.uk/" target="_blank" class="terminal-card p-10 rounded-xl block group">
-            <div class="flex flex-col items-center text-center">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAACXBIWXMAAAsTAAALEwEAmpwYAAABIElEQVR4nO2YQUrEQBBF34REvYv3vYf3PYS9i+e9h97F87yH972HoDeRXkXvIkFpIAsmYIskf0BaVf0HmqR/OUn7G0l7SClpQnOfn7fTD5A5ZC4wh+xB5gJzyBxkLjCH7EHmAnPIXGAO2YPMBeaQOchcYA7Zg8wF5pC5yFxgDtmDzAXmkLnIXGAO2YPMAeaQucgcYA7Zg8wB5pC5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yHw7fIAsIXOBOWQukifpA3TIng9i37oO62Vl2AAAAABJRU5ErkJggg==" class="w-16 h-16 terminal-icon mb-6" />
-                <h2 class="text-2xl font-bold mb-4 crt-glow"># pvesamu.main</h2>
-                <p class="text-xs mb-10 group-hover:text-[#010409]">[ PROD_ENV ]<br/>Storage_&_Critical_DB.</p>
-                <div class="px-4 py-2 border-2 border-[#00FF00] font-bold group-hover:border-[#010409]">ACCESS_CONSOLE</div>
+        <a href="https://pvesamu.wl-infra.uk/" target="_blank" class="terminal-card p-10 rounded-lg block group text-center">
+            <div class="icon-box">
+                <i class="fa-solid fa-microchip"></i>
+            </div>
+            <h2 class="text-2xl font-bold mb-4 crt-glow group-hover:text-[#010409]"># pvesamu.main</h2>
+            <p class="text-xs mb-10 group-hover:text-[#010409]">
+                [ PRODUCTION_ENV ]<br/>
+                STORAGE_MASTER // CRITICAL_DB
+            </p>
+            <div class="inline-block px-6 py-2 border-2 border-[#00FF00] font-bold group-hover:border-[#010409]">
+                EXEC :: CONNECT
             </div>
         </a>
+
     </main>
 
     <footer class="mt-20 text-center crt-glow">
-        <div class="text-[10px] font-bold">
-            [ TERMINAL_SECURED_BY_CLOUDFLARE_ZERO_TRUST ]
+        <div class="text-[10px] font-bold flex items-center justify-center gap-3">
+            <i class="fa-solid fa-user-shield"></i>
+            [ AUTH_MFA // CLOUDFLARE_ZERO_TRUST_ENABLED ]
         </div>
     </footer>
 
