@@ -13,14 +13,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Customizado para o tema Terminal Matrix */
-        
         body {
-            /* Fundo: Cor escura com imagem de padrão Matrix sutil */
             background-color: #010409;
             background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMEZGMDAiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=');
-            color: #00FF00; /* Verde Matrix */
-            font-family: 'Fira Mono', monospace; /* Fonte Terminal */
+            color: #00FF00;
+            font-family: 'Fira Mono', monospace;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -29,109 +26,56 @@
             margin: 0;
             padding: 20px;
         }
-
-        /* Efeito de brilho "CRT" no texto */
-        .crt-glow {
-            text-shadow: 0 0 8px rgba(0, 255, 0, 0.7);
-        }
-
-        /* Sobrescrever padrões do navegador para links */
-        a {
-            color: inherit;
-            text-decoration: none !important;
-        }
-
-        /* Card estilo terminal */
+        .crt-glow { text-shadow: 0 0 8px rgba(0, 255, 0, 0.7); }
+        a { color: inherit; text-decoration: none !important; }
         .terminal-card {
-            background-color: rgba(1, 4, 9, 0.9); /* Quase preto e opaco */
+            background-color: rgba(1, 4, 9, 0.9);
             border: 2px solid #00FF00;
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
             transition: all 0.2s ease;
         }
-
-        /* Efeito de seleção "Terminal" ao passar o mouse */
         .terminal-card:hover {
             background-color: #00FF00;
-            color: #010409; /* Inverte cores */
+            color: #010409;
             box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
         }
-
-        /* Forçar ícones pixelados a ficarem verdes, exceto no hover */
-        .terminal-icon {
-            filter: drop-shadow(0 0 2px rgba(0, 255, 0, 0.6));
-        }
-        
-        .terminal-card:hover .terminal-icon {
-            filter: invert(1) brightness(0.1); /* Ícone fica preto no hover */
-        }
-
+        .terminal-icon { filter: drop-shadow(0 0 2px rgba(0, 255, 0, 0.6)); transition: all 0.2s; }
+        .terminal-card:hover .terminal-icon { filter: invert(1) brightness(0.1); }
     </style>
 </head>
 <body>
 
-    <header class="w-full max-w-4xl flex flex-col items-center text-center mb-20 crt-glow">
-        
-        <div class="mb-6 p-1 border-2 border-dashed border-[#00FF00]/50 rounded-xl">
-            <img src="https://img.icons8.com/pixel-surfers/128/00FF00/database.png" alt="Servidor Pixelado" class="w-20 h-20 terminal-icon"/>
+    <header class="w-full max-w-4xl flex flex-col items-center text-center mb-16 crt-glow">
+        <div class="mb-6 p-2 border-2 border-dashed border-[#00FF00]/50 rounded-xl">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAACXBIWXMAAAsTAAALEwEAmpwYAAABm0lEQVR4nO2YwUrDMBiFv00E8SBEvYreR6uXvYreR6v30Xpfsre9it5H60W96EVvIuqYhS0IdZqlS9oU8n9AcpL2p6S/T9sk7SClpAnNfX7fXz1A5pC5wByyB5kLzCFzkLnAHLIHmQvMIXOQucAcMheYQ/Ygc4E5ZA8yF5hD5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gJzyB5kLjCHzEXmAnPIHmQuMIfMReYCc8geZC4wh8xF5gK7vX6A/CdzgTlkLpIn6QN0yJ6fP5r6CwAAAABJRU5ErkJggg==" class="w-16 h-16 terminal-icon" />
         </div>
-
-        <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
-            &gt; WL-INFRA_NODES
-        </h1>
-        
-        <div class="flex items-center mt-4 text-xs font-bold uppercase tracking-widest gap-2">
-            [ SECURED_ACCESS // HORIZONTE.CE ]
-        </div>
+        <h1 class="text-4xl font-bold tracking-tight">&gt; WL-INFRA_NODES</h1>
+        <div class="mt-4 text-[10px] font-bold border border-[#00FF00] px-3 py-1">[ HORIZONTE.CE // SECURED_SHELL ]</div>
     </header>
 
     <main class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-10">
-        
         <a href="https://pvelab.wl-infra.uk/" target="_blank" class="terminal-card p-10 rounded-xl block group">
             <div class="flex flex-col items-center text-center">
-                
-                <img src="https://img.icons8.com/pixel-surfers/128/00FF00/test-tube.png" alt="Lab Icon" class="w-16 h-16 terminal-icon mb-6"/>
-                
-                <h2 class="text-3xl font-bold mb-4 crt-glow group-hover:text-[#010409] group-hover:text-shadow-none">
-                    # pvelab.local
-                </h2>
-                
-                <p class="text-sm mb-12 leading-relaxed font-normal group-hover:text-[#010409]">
-                    [ TEST_ENV ] :: DELL_OPTIPLEX_8080.
-                    Homologação_CTs_VMs_ativos.
-                </p>
-                
-                <div class="px-5 py-2 border-2 border-[#00FF00] font-bold group-hover:border-[#010409] group-hover:bg-[#010409] group-hover:text-[#00FF00]">
-                    &gt; CONECTAR_AGORA
-                </div>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAACXBIWXMAAAsTAAALEwEAmpwYAAABIUlEQVR4nO2YQUrEQBBF34REvYv3vYf3PYS9i+e9h97F87yH972HoDeRXkXvIkFpIAsmYIskf0BaVf0HmqR/OUn7G0l7SClpQnOfn7fTD5A5ZC4wh+xB5gJzyBxkLjCH7EHmAnPIXGAO2YPMBeaQOchcYA7Zg8wF5pC5yFxgDtmDzAXmkLnIXGAO2YPMAeaQucgcYA7Zg8wB5pC5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yHw7fIAsIXOBOWQukifpA3TIng9i37oO62Vl2AAAAABJRU5ErkJggg==" class="w-16 h-16 terminal-icon mb-6" />
+                <h2 class="text-2xl font-bold mb-4 crt-glow"># pvelab.local</h2>
+                <p class="text-xs mb-10 group-hover:text-[#010409]">[ DELL_OPTIPLEX_8080 ]<br/>Homologação_CTs_VMs.</p>
+                <div class="px-4 py-2 border-2 border-[#00FF00] font-bold group-hover:border-[#010409]">ACCESS_CONSOLE</div>
             </div>
         </a>
 
         <a href="https://pvesamu.wl-infra.uk/" target="_blank" class="terminal-card p-10 rounded-xl block group">
             <div class="flex flex-col items-center text-center">
-                
-                <img src="https://img.icons8.com/pixel-surfers/128/00FF00/cpu.png" alt="Prod Icon" class="w-16 h-16 terminal-icon mb-6"/>
-                
-                <h2 class="text-3xl font-bold mb-4 crt-glow group-hover:text-[#010409] group-hover:text-shadow-none">
-                    # pvesamu.main
-                </h2>
-                
-                <p class="text-sm mb-12 leading-relaxed font-normal group-hover:text-[#010409]">
-                    [ PROD_ENV ] :: Servidor_Principal_Crítico.
-                    Banco_Dados_Ativo_Storage_Ativo.
-                </p>
-                
-                <div class="px-5 py-2 border-2 border-[#00FF00] font-bold group-hover:border-[#010409] group-hover:bg-[#010409] group-hover:text-[#00FF00]">
-                    &gt; CONECTAR_AGORA
-                </div>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAACXBIWXMAAAsTAAALEwEAmpwYAAABIElEQVR4nO2YQUrEQBBF34REvYv3vYf3PYS9i+e9h97F87yH972HoDeRXkXvIkFpIAsmYIskf0BaVf0HmqR/OUn7G0l7SClpQnOfn7fTD5A5ZC4wh+xB5gJzyBxkLjCH7EHmAnPIXGAO2YPMBeaQOchcYA7Zg8wF5pC5yFxgDtmDzAXmkLnIXGAO2YPMAeaQucgcYA7Zg8wB5pC5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yBxkDjIHmYPMQeYgc5A5yHw7fIAsIXOBOWQukifpA3TIng9i37oO62Vl2AAAAABJRU5ErkJggg==" class="w-16 h-16 terminal-icon mb-6" />
+                <h2 class="text-2xl font-bold mb-4 crt-glow"># pvesamu.main</h2>
+                <p class="text-xs mb-10 group-hover:text-[#010409]">[ PROD_ENV ]<br/>Storage_&_Critical_DB.</p>
+                <div class="px-4 py-2 border-2 border-[#00FF00] font-bold group-hover:border-[#010409]">ACCESS_CONSOLE</div>
             </div>
         </a>
-
     </main>
 
-    <footer class="mt-28 text-center crt-glow">
-        <div class="inline-flex items-center text-xs font-bold gap-3">
-            <img src="https://img.icons8.com/pixel-surfers/32/00FF00/lock.png" alt="Cadeado Pixelado" class="w-4 h-4 terminal-icon"/>
-            TERMINAL_SECURED_BY :: CLOUDFLARE_ZT // MFA_ACTIVE
+    <footer class="mt-20 text-center crt-glow">
+        <div class="text-[10px] font-bold">
+            [ TERMINAL_SECURED_BY_CLOUDFLARE_ZERO_TRUST ]
         </div>
     </footer>
 
