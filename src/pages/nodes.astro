@@ -12,127 +12,125 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* CONFIGURAÇÃO GLOBAL DO TERMINAL MATRIX */
+        /* RESET E FUNDO PRETO ABSOLUTO */
         body {
-            background-color: #000000; /* Fundo Preto Absoluto para Contraste Máximo */
-            color: #00FF00; /* Tudo Verde Fluorescente por Padrão */
+            background-color: #000000 !important;
+            color: #00FF00;
             font-family: 'Fira Mono', monospace;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
             margin: 0;
-            padding: 20px;
-            /* Efeito de linhas de scan de TV antiga (Sutil e Verde) */
-            background: linear-gradient(rgba(0, 20, 0, 0) 50%, rgba(0, 0, 0, 0.4) 50%), 
-                        linear-gradient(90deg, rgba(0, 50, 0, 0.1), rgba(0, 255, 0, 0.02), rgba(0, 50, 0, 0.1));
-            background-size: 100% 4px, 3px 100%;
+            overflow-x: hidden;
         }
 
-        /* Efeito de brilho "CRT" no texto e ícones */
+        /* EFEITO DE SCANLINE MAIS ESCURO */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.5) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 2;
+            background-size: 100% 3px, 2px 100%;
+            pointer-events: none;
+        }
+
         .crt-glow { 
-            text-shadow: 0 0 12px rgba(0, 255, 0, 0.9); 
+            text-shadow: 0 0 10px #00FF00; 
         }
         
-        /* Garantir que os ícones do Font Awesome herdem a cor verde e o brilho */
-        .fa-solid, .fa-brands, .fa-regular {
+        /* FORÇAR VERDE NOS ÍCONES */
+        .fa-solid, .fa-terminal, .fa-flask-vial, .fa-microchip, .fa-user-shield {
             color: #00FF00 !important;
-            filter: drop-shadow(0 0 8px rgba(0, 255, 0, 0.8));
+            display: inline-block;
         }
 
-        a { text-decoration: none !important; }
-
-        /* Card estilo terminal */
+        /* CARD SEM FUNDO CINZA */
         .terminal-card {
-            background-color: rgba(0, 15, 0, 0.2); /* Fundo sutilmente verde-escuro */
+            background-color: transparent;
             border: 2px solid #00FF00;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: 5;
         }
 
-        /* Efeito de seleção "Terminal" ao passar o mouse */
         .terminal-card:hover {
             background-color: #00FF00;
-            color: #000000; /* Inverte cores no hover para destacar */
-            box-shadow: 0 0 50px rgba(0, 255, 0, 0.6);
+            box-shadow: 0 0 30px #00FF00;
         }
 
-        /* Forçar ícones e textos a ficarem pretos no hover do card */
-        .terminal-card:hover .fa-solid,
-        .terminal-card:hover h2,
-        .terminal-card:hover p,
-        .terminal-card:hover .connect-btn {
+        /* INVERTER CORES NO HOVER */
+        .terminal-card:hover * {
             color: #000000 !important;
             text-shadow: none !important;
-            filter: none !important;
-        }
-
-        .icon-box {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
         }
 
         .connect-btn {
-            border: 2px solid #00FF00;
+            border: 1px solid #00FF00;
         }
         .terminal-card:hover .connect-btn {
             border-color: #000000;
         }
     </style>
 </head>
-<body>
+<body class="p-4">
 
-    <header class="w-full max-w-4xl flex flex-col items-center text-center mb-16 crt-glow">
-        <div class="icon-box">
-            <i class="fa-solid fa-terminal"></i>
-        </div>
-        <h1 class="text-4xl md:text-5xl font-bold tracking-tighter">
-            > WL-INFRA_NODES
-        </h1>
-        <div class="mt-4 text-xs font-bold border border-[#00FF00] px-4 py-1">
-            [ HORIZONTE.CE // SECURED_SHELL ]
-        </div>
-    </header>
-
-    <main class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div class="max-w-4xl w-full flex flex-col items-center">
         
-        <a href="https://pvelab.wl-infra.uk/" target="_blank" class="terminal-card p-10 rounded-lg block group text-center">
-            <div class="icon-box">
-                <i class="fa-solid fa-flask-vial"></i>
+        <header class="text-center mb-16 crt-glow">
+            <div class="text-6xl mb-6">
+                <i class="fa-solid fa-terminal"></i>
             </div>
-            <h2 class="text-2xl font-bold mb-4 crt-glow"># pvelab.local</h2>
-            <p class="text-xs mb-10 font-normal">
-                [ DELL_OPTIPLEX_8080 ]<br/>
-                HOMOLOG_ENV // CT_VM_ACTIVE
-            </p>
-            <div class="connect-btn inline-block px-6 py-2 font-bold">
-                EXEC :: CONNECT
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tighter">
+                > WL-INFRA_NODES
+            </h1>
+            <div class="mt-4 text-sm font-bold border border-[#00FF00] px-4 py-1 inline-block">
+                [ HORIZONTE.CE // SECURED_SHELL ]
             </div>
-        </a>
+        </header>
 
-        <a href="https://pvesamu.wl-infra.uk/" target="_blank" class="terminal-card p-10 rounded-lg block group text-center">
-            <div class="icon-box">
-                <i class="fa-solid fa-microchip"></i>
-            </div>
-            <h2 class="text-2xl font-bold mb-4 crt-glow"># pvesamu.main</h2>
-            <p class="text-xs mb-10 font-normal">
-                [ PRODUCTION_ENV ]<br/>
-                STORAGE_MASTER // CRITICAL_DB
-            </p>
-            <div class="connect-btn inline-block px-6 py-2 font-bold">
-                EXEC :: CONNECT
-            </div>
-        </a>
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
+            
+            <a href="https://pvelab.wl-infra.uk/" target="_blank" class="terminal-card p-10 rounded-lg block text-center group">
+                <div class="text-5xl mb-6">
+                    <i class="fa-solid fa-flask-vial"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-4 crt-glow"># pvelab.local</h2>
+                <p class="text-xs mb-8 font-bold">
+                    [ DELL_OPTIPLEX_8080 ]<br/>
+                    HOMOLOG_ENV // CT_VM_ACTIVE
+                </p>
+                <div class="connect-btn py-2 px-4 text-sm font-bold">
+                    EXEC :: CONNECT
+                </div>
+            </a>
 
-    </main>
+            <a href="https://pvesamu.wl-infra.uk/" target="_blank" class="terminal-card p-10 rounded-lg block text-center group">
+                <div class="text-5xl mb-6">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-4 crt-glow"># pvesamu.main</h2>
+                <p class="text-xs mb-8 font-bold">
+                    [ PRODUCTION_ENV ]<br/>
+                    STORAGE_MASTER // CRITICAL_DB
+                </p>
+                <div class="connect-btn py-2 px-4 text-sm font-bold">
+                    EXEC :: CONNECT
+                </div>
+            </a>
 
-    <footer class="mt-20 text-center crt-glow">
-        <div class="text-[10px] font-bold flex items-center justify-center gap-3">
-            <i class="fa-solid fa-user-shield"></i>
-            [ AUTH_MFA // CLOUDFLARE_ZERO_TRUST_ENABLED ]
-        </div>
-    </footer>
+        </main>
+
+        <footer class="mt-20 text-center crt-glow">
+            <div class="text-xs font-bold flex items-center justify-center gap-3">
+                <i class="fa-solid fa-user-shield"></i>
+                [ AUTH_MFA // CLOUDFLARE_ZERO_TRUST_ENABLED ]
+            </div>
+        </footer>
+    </div>
 
 </body>
 </html>
