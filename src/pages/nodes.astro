@@ -12,76 +12,73 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* RESET E FUNDO PRETO ABSOLUTO */
+        /* FUNDO PRETO TOTAL */
         body {
             background-color: #000000 !important;
-            color: #00FF00;
+            color: #00FF00 !important;
             font-family: 'Fira Mono', monospace;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0;
+            padding: 20px;
             overflow-x: hidden;
         }
 
-        /* EFEITO DE SCANLINE MAIS ESCURO */
+        /* EFEITO DE SCANLINE (TV ANTIGA) */
         body::before {
             content: " ";
             display: block;
             position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.5) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            z-index: 2;
-            background-size: 100% 3px, 2px 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+            z-index: 10;
+            background-size: 100% 3px;
             pointer-events: none;
         }
 
         .crt-glow { 
-            text-shadow: 0 0 10px #00FF00; 
+            text-shadow: 0 0 12px #00FF00; 
         }
         
-        /* FORÇAR VERDE NOS ÍCONES */
-        .fa-solid, .fa-terminal, .fa-flask-vial, .fa-microchip, .fa-user-shield {
+        /* GARANTIR VERDE EM TUDO */
+        .terminal-card, .terminal-card *, i, h2, p, span {
             color: #00FF00 !important;
-            display: inline-block;
         }
 
-        /* CARD SEM FUNDO CINZA */
         .terminal-card {
-            background-color: transparent;
+            background-color: rgba(0, 20, 0, 0.1);
             border: 2px solid #00FF00;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             position: relative;
             z-index: 5;
         }
 
+        /* HOVER: APENAS BRILHA, NÃO MUDA COR */
         .terminal-card:hover {
-            background-color: #00FF00;
-            box-shadow: 0 0 30px #00FF00;
-        }
-
-        /* INVERTER CORES NO HOVER */
-        .terminal-card:hover * {
-            color: #000000 !important;
-            text-shadow: none !important;
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.5);
+            transform: translateY(-2px);
+            background-color: rgba(0, 255, 0, 0.05);
         }
 
         .connect-btn {
             border: 1px solid #00FF00;
+            margin-top: 1rem;
         }
-        .terminal-card:hover .connect-btn {
-            border-color: #000000;
+
+        .icon-box {
+            font-size: 3.5rem;
+            filter: drop-shadow(0 0 8px #00FF00);
         }
     </style>
 </head>
-<body class="p-4">
+<body>
 
     <div class="max-w-4xl w-full flex flex-col items-center">
         
         <header class="text-center mb-16 crt-glow">
-            <div class="text-6xl mb-6">
+            <div class="icon-box mb-6">
                 <i class="fa-solid fa-terminal"></i>
             </div>
             <h1 class="text-4xl md:text-5xl font-bold tracking-tighter">
@@ -94,30 +91,30 @@
 
         <main class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
             
-            <a href="https://pvelab.wl-infra.uk/" target="_blank" class="terminal-card p-10 rounded-lg block text-center group">
-                <div class="text-5xl mb-6">
+            <a href="https://pvelab.wl-infra.uk/" target="_blank" class="terminal-card p-10 rounded-lg block text-center">
+                <div class="icon-box mb-6">
                     <i class="fa-solid fa-flask-vial"></i>
                 </div>
                 <h2 class="text-2xl font-bold mb-4 crt-glow"># pvelab.local</h2>
-                <p class="text-xs mb-8 font-bold">
+                <p class="text-xs mb-8">
                     [ DELL_OPTIPLEX_8080 ]<br/>
                     HOMOLOG_ENV // CT_VM_ACTIVE
                 </p>
-                <div class="connect-btn py-2 px-4 text-sm font-bold">
+                <div class="connect-btn py-2 px-4 text-sm font-bold uppercase">
                     EXEC :: CONNECT
                 </div>
             </a>
 
-            <a href="https://pvesamu.wl-infra.uk/" target="_blank" class="terminal-card p-10 rounded-lg block text-center group">
-                <div class="text-5xl mb-6">
+            <a href="https://pvesamu.wl-infra.uk/" target="_blank" class="terminal-card p-10 rounded-lg block text-center">
+                <div class="icon-box mb-6">
                     <i class="fa-solid fa-microchip"></i>
                 </div>
                 <h2 class="text-2xl font-bold mb-4 crt-glow"># pvesamu.main</h2>
-                <p class="text-xs mb-8 font-bold">
+                <p class="text-xs mb-8">
                     [ PRODUCTION_ENV ]<br/>
                     STORAGE_MASTER // CRITICAL_DB
                 </p>
-                <div class="connect-btn py-2 px-4 text-sm font-bold">
+                <div class="connect-btn py-2 px-4 text-sm font-bold uppercase">
                     EXEC :: CONNECT
                 </div>
             </a>
@@ -125,7 +122,7 @@
         </main>
 
         <footer class="mt-20 text-center crt-glow">
-            <div class="text-xs font-bold flex items-center justify-center gap-3">
+            <div class="text-[10px] font-bold flex items-center justify-center gap-3 border-t border-[#00FF00]/30 pt-6">
                 <i class="fa-solid fa-user-shield"></i>
                 [ AUTH_MFA // CLOUDFLARE_ZERO_TRUST_ENABLED ]
             </div>
