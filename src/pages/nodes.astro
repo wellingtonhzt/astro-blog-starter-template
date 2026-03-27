@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* FUNDO PRETO ABSOLUTO E RESET */
+        /* CONFIGURAÇÃO GLOBAL DO TERMINAL MATRIX - TRAVADA */
         html, body {
-            background-color: #000000 !important;
-            color: #00FF00 !important;
+            background-color: #000000 !important; /* PRETO ABSOLUTO */
+            color: #00FF00 !important; /* TUDO VERDE POR PADRÃO */
             font-family: 'Fira Mono', monospace;
             min-height: 100vh;
             margin: 0;
@@ -26,108 +26,131 @@
             flex-direction: column;
         }
 
-        /* TRAVAR CORES VERDES */
+        /* Forçar todos os elementos de texto a serem verdes, anulando as classes do Tailwind */
         body * {
             color: #00FF00 !important;
             border-color: #00FF00 !important;
         }
 
+        /* Efeito de linhas de scan de TV antiga (Sutil e Verde) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0, 20, 0, 0) 50%, rgba(0, 0, 0, 0.4) 50%), 
+                        linear-gradient(90deg, rgba(0, 50, 0, 0.1), rgba(0, 255, 0, 0.02), rgba(0, 50, 0, 0.1));
+            background-size: 100% 4px, 3px 100%;
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        /* Efeito de brilho "CRT" no texto e ícones por padrão */
         .crt-glow { 
-            text-shadow: 0 0 12px rgba(0, 255, 0, 0.8); 
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.7); 
         }
         
-        /* ÍCONES VERDES */
-        .fa-solid {
+        /* Garantir que os ícones do Font Awesome herdem a cor verde e o brilho */
+        .fa-solid, .fa-brands, .fa-regular {
             color: #00FF00 !important;
             filter: drop-shadow(0 0 8px rgba(0, 255, 0, 0.6));
+            transition: all 0.2s ease; /* Transição rápida e limpa */
         }
 
         a { text-decoration: none !important; }
 
-        /* ESTILO DO CARD (SEM FUNDO PARA PARECER TERMINAL PURO) */
-        .terminal-block {
-            background: transparent;
-            border: none;
-            cursor: pointer;
+        /* Card estilo terminal */
+        .terminal-card {
+            background-color: rgba(0, 15, 0, 0.2); /* Fundo sutilmente verde-escuro */
+            border: 2px solid #00FF00;
             transition: all 0.2s ease;
-            width: 100%;
-            max-width: 500px;
+            cursor: pointer;
+            position: relative;
+            z-index: 5;
         }
 
-        /* HOVER BRANCO CONFORME SOLICITADO */
-        .terminal-block:hover * {
-            color: #FFFFFF !important;
-            border-color: #FFFFFF !important;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8) !important;
+        /* --- O SEU PEDIDO DE HOVER ESTÁ AQUI --- */
+        /* Efeito de seleção ao passar o mouse: Borda Branca, Texto Branco, Ícone Branco */
+        .terminal-card:hover {
+            border-color: #FFFFFF !important; /* Borda fica branca, anulando o verde */
+            background-color: rgba(0, 0, 0, 0.9); /* Fundo mais escuro no hover */
+            transform: translateY(-3px); /* Levanta levemente o card */
+        }
+
+        /* Forçar TUDO dentro do card a ficar BRANCO no hover, anulando as regras anteriores */
+        .terminal-card:hover *,
+        .terminal-card:hover .fa-solid,
+        .terminal-card:hover h2,
+        .terminal-card:hover p,
+        .terminal-card:hover .connect-btn {
+            color: #FFFFFF !important; /* Texto fica branco absoluto */
+            text-shadow: none !important; /* Remove o brilho verde */
+            filter: none !important; /* Remove o brilho verde do ícone */
         }
 
         .icon-box {
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
+            color: #00FF00 !important; /* Ícone é verde por padrão */
         }
 
-        .exec-line {
-            border-left: 3px solid #00FF00;
-            padding-left: 15px;
-            margin-top: 10px;
-            text-align: left;
+        .connect-btn {
+            border: 2px solid #00FF00;
+            transition: all 0.2s ease;
+            color: #00FF00 !important;
         }
-
-        .connect-box {
-            border: 1px solid #00FF00;
-            padding: 5px 15px;
-            display: inline-block;
-            margin-top: 10px;
+        .terminal-card:hover .connect-btn {
+            border-color: #FFFFFF !important; /* Borda do botão fica branca */
+            color: #FFFFFF !important;
         }
     </style>
 </head>
-<body class="p-10">
+<body class="p-6 md:p-12">
 
-    <header class="text-center mb-20 crt-glow">
-        <div class="text-5xl mb-4">
+    <header class="w-full max-w-4xl flex flex-col items-center text-center mb-16 crt-glow">
+        <div class="icon-box">
             <i class="fa-solid fa-terminal"></i>
         </div>
-        <h1 class="text-3xl font-bold tracking-tighter">> WL-INFRA_NODES</h1>
-        <p class="text-[10px] mt-2 border border-[#00FF00] inline-block px-2">[ HORIZONTE.CE // SECURED_SHELL ]</p>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tighter">
+            > WL-INFRA_NODES
+        </h1>
+        <div class="mt-4 text-xs font-bold border-2 px-4 py-1">
+            [ HORIZONTE.CE // SECURED_SHELL ]
+        </div>
     </header>
 
-    <main class="flex flex-col items-center gap-y-32 w-full"> <a href="https://pvelab.wl-infra.uk/" target="_blank" class="terminal-block group">
-            <div class="flex flex-col items-center">
-                <div class="icon-box">
-                    <i class="fa-solid fa-flask-vial"></i>
-                </div>
-                <h2 class="text-2xl font-bold mb-2 crt-glow"># pvelab.local</h2>
-                <div class="text-[10px] opacity-80 mb-4">
-                    [ DELL_OPTIPLEX_8080 ]<br/>
-                    HOMOLOG_ENV // CT_VM_ACTIVE
-                </div>
-                <div class="exec-line w-full">
-                    <div class="connect-box font-bold">EXEC :: CONNECT</div>
-                </div>
+   <main class="w-full max-w-4xl grid grid-cols-1 gap-y-24"> <a href="https://pvelab.wl-infra.uk/" target="_blank" class="terminal-card w-full p-10 rounded-lg block text-center transition-all duration-300">
+            <div class="icon-box mb-10"> <i class="fa-solid fa-flask-vial"></i>
+            </div>
+            <h2 class="text-3xl font-bold mb-5 crt-glow"># pvelab.local</h2>
+            <p class="text-xs mb-10 font-normal">
+                [ DELL_OPTIPLEX_8080 ]<br/>
+                HOMOLOG_ENV // CT_VM_ACTIVE
+            </p>
+            <div class="connect-btn inline-block px-10 py-3 font-bold uppercase border-2">
+                EXEC :: CONNECT
             </div>
         </a>
 
-        <a href="https://pvesamu.wl-infra.uk/" target="_blank" class="terminal-block group">
-            <div class="flex flex-col items-center">
-                <div class="icon-box">
-                    <i class="fa-solid fa-microchip"></i>
-                </div>
-                <h2 class="text-2xl font-bold mb-2 crt-glow"># pvesamu.main</h2>
-                <div class="text-[10px] opacity-80 mb-4">
-                    [ PRODUCTION_ENV ]<br/>
-                    VOIP_MONITOR // CRITICAL_DB
-                </div>
-                <div class="exec-line w-full">
-                    <div class="connect-box font-bold">EXEC :: CONNECT</div>
-                </div>
+        <a href="https://pvesamu.wl-infra.uk/" target="_blank" class="terminal-card w-full p-10 rounded-lg block text-center transition-all duration-300">
+            <div class="icon-box mb-10"> <i class="fa-solid fa-microchip"></i>
+            </div>
+            <h2 class="text-3xl font-bold mb-5 crt-glow"># pvesamu.main</h2>
+            <p class="text-xs mb-10 font-normal">
+                [ PRODUCTION_ENV ]<br/>
+                STORAGE_MASTER // CRITICAL_DB
+            </p>
+            <div class="connect-btn inline-block px-10 py-3 font-bold uppercase border-2">
+                EXEC :: CONNECT
             </div>
         </a>
 
     </main>
-
-    <footer class="mt-32 opacity-60 text-[10px] crt-glow flex items-center gap-2">
-        <i class="fa-solid fa-user-shield"></i>
-        [ AUTH_MFA // CLOUDFLARE_ZERO_TRUST_ENABLED ]
+    <footer class="mt-20 text-center crt-glow">
+        <div class="text-[10px] font-bold flex items-center justify-center gap-3">
+            <i class="fa-solid fa-user-shield"></i>
+            [ AUTH_MFA // CLOUDFLARE_ZERO_TRUST_ENABLED ]
+        </div>
     </footer>
 
 </body>
